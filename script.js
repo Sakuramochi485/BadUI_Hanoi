@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hintPopup = document.getElementById('hint-popup');
     const hintText = document.getElementById('hint-text');
     const closeHintButton = document.getElementById('close-hint-button');
-    const restartFromHintButton = document.getElementById('restart-from-hint-button'); // ★追加
+    const restartFromHintButton = document.getElementById('restart-from-hint-button');
 
     // エラーポップアップ
     const errorPopup = document.getElementById('error-popup');
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // タイマー制御関数
     /**
-     * 指定された時間でヒントタイマーを開始する
+     * 指定された時間でヒントタイマーを開始する関数
      * @param {number} duration - 待ち時間 (ミリ秒)
      */
     function startHintTimer(duration) {
@@ -187,18 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, duration);
     }
 
-    /**
-     * ヒントタイマーを一時停止し、残り時間を計算して保存する
-     */
+    // ヒントタイマーを一時停止し、残り時間を計算して保存する関数
     function pauseHintTimer() {
         clearTimeout(hintTimerId);
         const elapsed = Date.now() - hintTimerStartTime;
         hintTimeRemaining = Math.max(0, hintTimeRemaining - elapsed);
     }
 
-    /**
-     * 保存された残り時間でタイマーを再開する
-     */
+    // 保存された残り時間でタイマーを再開する関数
     function resumeHintTimer() {
         startHintTimer(hintTimeRemaining);
     }
@@ -215,29 +211,28 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function showLoadingAnimation() {
         return new Promise(resolve => {
-            // 1. オーバーレイを表示し、バーをリセット
+            // オーバーレイを表示し、バーをリセット
             progressOverlay.classList.remove('hidden');
             progressBar.style.transition = 'none'; // 一時的にトランジションを無効化
             progressBar.style.width = '0%';
 
-            // 2. 95%まで1秒かけて進める
+            // 95%まで1秒かけて進める
             setTimeout(() => {
                 progressBar.style.transition = 'width 1s ease-out'; // トランジションを再設定
                 progressBar.style.width = '95%';
             }, 20); // 少し遅延させてから開始
 
-            // 3. 1.9秒間、95%で停止
+            // 1.9秒間、95%で停止
             setTimeout(() => {
-                // この間は何もしない（停止）
             }, 1020); // 1秒後 + 2.9秒の停止期間の開始
 
-            // 4. 最後の5%を0.1秒で進めて完了
+            // 最後の5%を0.1秒で進めて完了
             setTimeout(() => {
                 progressBar.style.transition = 'width 0.1s linear'; // 最後の動き
                 progressBar.style.width = '100%';
-            }, 2920); // 1秒 + 1.9秒後
+            }, 2920); // 1秒 + 2.9秒後
 
-            // 5. アニメーション完了後、オーバーレイを隠してPromiseを解決
+            // アニメーション完了後、オーバーレイを隠してPromiseを解決
             setTimeout(() => {
                 progressOverlay.classList.add('hidden');
                 resolve();
@@ -246,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // カスタムドラッグ＆ドロップと物理シミュレーションのロジック
-    
     // マウスでディスクを掴んだ時の処理
     async function handleMouseDown(e) {
         // すでにドラッグ中、または一番上のディスクでない場合は何もしない
@@ -267,13 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedDisk = e.target;
         originalTower = e.target.parentElement;
 
-        // ★★★ タワーのインデックス(n)と幅を取得し、オフセットを計算 ★★★
+        // タワーのインデックスnと幅を取得し、オフセットを計算
         const towerIndex = Array.from(towers).indexOf(originalTower);
         const towerWidth = originalTower.offsetWidth;
         physics.offset = towerIndex * towerWidth;
         const pixelWidth = draggedDisk.offsetWidth;
 
-        // ★★★ offsetLeft/Top を使って親要素からの相対位置を正確に取得 ★★★
+        // offsetLeft/Top を使って親要素からの相対位置を取得
         const initialX = draggedDisk.offsetLeft;
         const initialY = draggedDisk.offsetTop;
 
@@ -305,25 +299,21 @@ document.addEventListener('DOMContentLoaded', () => {
         animationFrameId = requestAnimationFrame(animationLoop);
     }
 
-    /**
-     * ディスクを掴んだままマウスを動かした時の処理
-     */
+    // ディスクを掴んだままマウスを動かした時の処理
     function handleMouseMove(e) {
         if (!isDragging) return;
-        // ★★★ カーソル位置をコンテナ基準の相対座標で更新 ★★★
+        // カーソル位置をコンテナ基準の相対座標で更新
         const containerRect = gameContainer.getBoundingClientRect();
         physics.cursor.x = e.clientX - containerRect.left;
         physics.cursor.y = e.clientY - containerRect.top;
     }
 
-    /**
-     * 物理法則に基づいてディスクを動かすアニメーションループ
-     */
+    // 物理法則に基づいてディスクを動かすアニメーションループ
     function animationLoop() {
         if (!isDragging) return;
 
         // カーソルとディスクの間の距離を計算
-        // ★★★ カーソルとディスクの中心位置の計算もコンテナ基準で行う ★★★
+        // カーソルとディスクの中心位置の計算もコンテナ基準で行う
         const diskCenterX = physics.pos.x + draggedDisk.offsetWidth / 2;
         const diskCenterY = physics.pos.y + draggedDisk.offsetHeight / 2;
         const displacementX = physics.cursor.x - diskCenterX;
@@ -355,9 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animationFrameId = requestAnimationFrame(animationLoop);
     }
 
-    /**
-     * マウスのボタンを放した時の処理 (ドロップ処理)
-     */
+    // マウスのボタンを放した時の処理
     async function handleMouseUp(e) {
         if (!isDragging) return;
         isDragging = false;
@@ -373,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // --- 設置先のタワーを決定 ---
+        // 設置先のタワーを決定
         const finalX = physics.pos.x + draggedDisk.offsetWidth / 2;
         let targetTower = null;
         towers.forEach(tower => {
@@ -385,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // --- 設置判定 ---
+        // 設置判定
         if (targetTower) {
             const topDisk = targetTower.lastChild;
             const draggedDiskSize = parseInt(draggedDisk.dataset.size);
@@ -419,9 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         originalTower = null;
     }
 
-    /**
-     * ディスクのスタイルをリセットし、元のタワーに戻す
-     */
+    // ディスクのスタイルをリセットし、元のタワーに戻す
     function resetDiskPosition() {
         if (!draggedDisk || !originalTower) return;
         // インラインスタイルを削除して、CSSクラスによる配置に戻す
@@ -433,6 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         originalTower.appendChild(draggedDisk);
     }
 
+    // ゲームをクリアしたか判定する関数
     function checkWinCondition() {
         
         const diskCount = Math.round(parseFloat(diskCountSlider.value));

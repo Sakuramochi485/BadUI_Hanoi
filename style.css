@@ -9,12 +9,12 @@ body {
     padding: 20px;
 }
 
-/* 汎用: 要素を非表示にするクラス */
+/* 要素を非表示にするクラス */
 .hidden {
     display: none !important;
 }
 
-/* --- スタート画面のスタイル --- */
+/* スタート画面のスタイル */
 #start-screen {
     position: fixed;
     top: 0;
@@ -59,6 +59,7 @@ body {
     text-decoration: underline;
 }
 
+/* ゲーム開始ボタンのスタイル */
 #start-game-button {
     padding: 12px 30px;
     font-size: 1.2em;
@@ -74,8 +75,7 @@ body {
     background-color: #45a049;
 }
 
-
-/* --- ゲーム本体のスタイル --- */
+/* ゲーム本体のスタイル */
 #game-wrapper {
     display: flex;
     flex-direction: column;
@@ -94,6 +94,7 @@ h1 {
     gap: 10px;
 }
 
+/* リセットボタンのスタイル */
 #start-button {
     padding: 8px 16px;
     font-size: 16px;
@@ -116,7 +117,7 @@ h1 {
     max-width: 600px;
     height: 200px;
     border-bottom: 5px solid #607d8b;
-    position: relative; /* ★★★ この行を追加 ★★★ */
+    position: relative; /* ディスクの物理演算に利用 */
 }
 
 .tower {
@@ -163,6 +164,7 @@ h1 {
     cursor: grabbing;
 }
 
+/* メッセージのスタイル */
 #message-container {
     margin-top: 20px;
     text-align: center;
@@ -175,15 +177,14 @@ h1 {
     height: 25px;
 }
 
-/* ★★★ここから追加★★★ */
-/* --- ヒントポップアップのスタイル --- */
+/* ヒントポップアップのスタイル */
 #hint-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒い背景 */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -204,15 +205,14 @@ h1 {
     color: #1a73e8;
 }
 
-/* [追加] ボタンを囲むコンテナのスタイル */
 .hint-buttons {
     display: flex;
-    justify-content: space-around; /* ボタンを均等に配置 */
+    justify-content: space-around;
     width: 100%;
     margin-top: 20px;
 }
 
-/* [追加] やり直すボタンのスタイル */
+/* 「戻す」ボタンのスタイル */
 #restart-from-hint-button {
     padding: 8px 20px;
     border: none;
@@ -241,39 +241,39 @@ h1 {
     background-color: #5a6268;
 }
 
-/* ★★★ここから追加★★★ */
+/* リセット時のメッセージのスタイル */
 #reset-message {
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     
-    font-size: 1.8em; /* 少し大きくして目立たせる */
+    font-size: 1.8em;
     font-weight: bold;
-    color: #155ab6; /* 色を赤系に変更 */
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し白くして視認性UP */
+    color: #155ab6;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px 20px;
     border-radius: 10px;
 
     /* アニメーションと重なり順の設定 */
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    pointer-events: none; /* メッセージがマウス操作の邪魔にならないようにする */
-    z-index: 1000; /* ★重要：値を大きくして最前面に表示 */
+    pointer-events: none;
+    z-index: 1000;
 }
 
-/* ★★★ エラーポップアップのスタイル（ここから追加） ★★★ */
+/* エラーポップアップのスタイル */
 #error-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒い背景 */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* 最前面に表示 */
+    z-index: 2000;
 }
 
 .error-content {
@@ -287,17 +287,17 @@ h1 {
 
 .error-content h3 {
     margin-top: 0;
-    color: #c0392b; /* エラーメッセージを赤色に */
+    color: #c0392b;
 }
 
 .error-buttons {
     display: flex;
-    justify-content: space-around; /* ボタンを均等に配置 */
+    justify-content: space-around;
     width: 100%;
     margin-top: 20px;
 }
 
-/* エラーポップアップの「やり直す」ボタンのスタイル */
+/* エラーポップアップの「戻す」ボタンのスタイル */
 #restart-from-error-button {
     padding: 8px 20px;
     border: none;
@@ -326,9 +326,8 @@ h1 {
 #close-error-button:hover {
     background-color: #5a6268;
 }
-/* ★★★ 追加ここまで ★★★ */
 
-/* ★★★ プログレスバーのスタイル（ここから追加） ★★★ */
+/* プログレスバーのスタイル */
 #progress-overlay {
     position: fixed;
     top: 0;
@@ -340,7 +339,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 3000; /* 最前面に表示 */
+    z-index: 3000;
 }
 
 #progress-container {
@@ -367,28 +366,25 @@ h1 {
     font-size: 1.2em;
     letter-spacing: 2px;
 }
-/* ★★★ 追加ここまで ★★★ */
 
-/* ★★★ 設定ボタンのスタイル（ここから追加） ★★★ */
+/* 設定ボタンのスタイル */
 #settings-button {
     padding: 8px 16px;
     font-size: 16px;
-    background-color: #6c757d; /* グレー系 */
+    background-color: #6c757d;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-right: 10px; /* リセットボタンとの間に隙間を作る */
+    margin-right: 10px;
 }
 
 #settings-button:hover {
     background-color: #5a6268;
 }
-/* ★★★ 追加ここまで ★★★ */
 
-
-/* ★★★ 設定画面のスタイル（ここから追加） ★★★ */
+/* 設定画面のスタイル */
 #settings-screen {
     position: fixed;
     top: 0;
@@ -420,13 +416,13 @@ h1 {
     margin-bottom: 15px;
 }
 
-/* スライダーの見た目を調整 */
+/* スライダーのスタイル */
 #disk-count-slider {
     width: 80%;
     margin-bottom: 25px;
 }
 
-/* OKボタンのスタイル */
+/* 設定画面の「OK」ボタンのスタイル */
 #close-settings-button {
     padding: 8px 25px;
     border: none;
@@ -440,4 +436,3 @@ h1 {
 #close-settings-button:hover {
     background-color: #155ab6;
 }
-/* ★★★ 追加ここまで ★★★ */
