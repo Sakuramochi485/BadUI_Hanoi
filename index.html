@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ハノイの塔 ~ Un-usable Edition ~</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--スタート画面-->
+    <div id="start-screen">
+        <div class="start-content">
+            <h2>ハノイの塔 ~ Un-usable Edition ~</h2>
+            <p>ルールは<a href="https://www.google.com/" target="_blank">こちらのサイト</a>を利用して確認してください。</p>
+            <button id="start-game-button">ゲーム開始</button>
+        </div>
+    </div>
+    <!--ゲーム画面-->
+    <main id="game-wrapper" class="hidden">
+        <h1>ハノイの塔 ~ Un-usable Edition ~</h1>
+        <div class="controls">
+            <button id="settings-button">設定</button>
+            <button id="start-button">リセット</button>
+        </div>
+
+        <div id="game-container">
+            <div class="tower" id="tower-1" data-tower="1"></div>
+            <div class="tower" id="tower-2" data-tower="2"></div>
+            <div class="tower" id="tower-3" data-tower="3"></div>
+        </div>
+
+        <div id="message-container">
+            <p>移動回数: <span id="move-count">0</span></p>
+            <p id="win-message"></p>
+            <p id="reset-message"></p> </div>
+        </div>
+    </main>
+    <!--ヒントポップアップ-->
+    <div id="hint-popup" class="hidden">
+        <div class="hint-content">
+            <h3>☆ヒント☆</h3>
+            <p id="hint-text">ここにヒントが表示されます。</p>
+            <div class="hint-buttons">
+                <button id="restart-from-hint-button">戻す</button>
+                <button id="close-hint-button">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!--エラーポップアップ-->
+    <div id="error-popup" class="hidden">
+        <div class="error-content">
+            <h3>☆エラー☆</h3>
+            <div class="error-buttons">
+                <button id="close-error-button">OK</button>
+                <button id="restart-from-error-button">戻す</button>
+            </div>
+        </div>
+    </div>
+
+    <!--プログレスバー-->
+    <div id="progress-overlay" class="hidden">
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <p>☆読み込み中☆</p>
+    </div>
+
+    <!--設定画面-->
+    <div id="settings-screen" class="hidden">
+        <div class="settings-content">
+            <h3>☆設定☆</h3>
+            <p>ディスクの枚数</p>
+            <input type="range" id="disk-count-slider" min="1" max="30" value="8" step="0.01">
+            <button id="close-settings-button">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
